@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PdfService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:5001';
+  private apiUrl = 'http://localhost:5001/api';
 
   downloadPdf(links?: string[]): Observable<Blob> {
     return this.http.post(
