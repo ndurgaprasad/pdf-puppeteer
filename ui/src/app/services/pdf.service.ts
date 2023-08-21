@@ -11,7 +11,7 @@ export class PdfService {
 
   downloadPdf(links?: string[]): Observable<Blob> {
     return this.http.post(
-      `${this.apiUrl}/generate-pdf`,
+      `${this.apiUrl}/ms-generate-pdf`,
       { links },
       { responseType: 'blob' }
     );

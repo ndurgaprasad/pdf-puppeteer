@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs-extra');
 
 const pdfRoutes = require('./controllers/pdfController');
+const msRoutes = require('./controllers/ms-controller');
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(
 
 // Register Routes
 app.use('/api', pdfRoutes);
+app.use('/api', msRoutes);
 
 const port = 5001;
 app.listen(port, () => {
