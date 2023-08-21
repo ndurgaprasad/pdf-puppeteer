@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Add Link to Download Pdf</h2>
+  <form [formGroup]="linkForm" (ngSubmit)="addLink()">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="url" placeholder="Enter URL" />
+      <mat-error *ngIf="linkForm.get('url')?.hasError('required')"
+        >URL is required</mat-error
+      >
+      <mat-error *ngIf="linkForm.get('url')?.hasError('pattern')"
+        >Invalid URL</mat-error
+      >
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add Link</button>
+  </form>
+</div>
+
+<div *ngIf="linkList.length > 0" class="container">
+  <h2>Links</h2>
+  <ul class="link-list">
+    <li *ngFor="let link of linkList; let i = index" class="link-item">
+      <span class="link-text">{{ link }}</span>
+      <button mat-icon-button color="warn" (click)="removeLink(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </li>
+  </ul>
+  <button mat-raised-button color="primary" (click)="downloadPdf()">
+    Download PDF
+  </button>
+</div>
