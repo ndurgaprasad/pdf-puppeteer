@@ -37,15 +37,20 @@ app.post('/generate-pdf', async (req, res) => {
       await page.goto(link, { waitUntil: 'domcontentloaded' });
       const articleTitle = await page.title();
       // const articleContent = await page.content();
-      const elements = ['h2', 'img', 'p'];
+      const elements = ['h1', 'h2', 'p'];
 
       let articleContent = '';
       for (ele of elements) {
-        articleContent +=
-          (await page.$eval(`.crayons-article__main ${ele}`, (el) => {
-            console.log(el);
-            return el === 'img' ? el : el.innerHTML;
-          })) + '<br />';
+        let content = '';
+        try {
+          content = await page.$eval(
+            `.crayons-article__main ${ele}`,
+            (el) => el.innerHTML
+          );
+        } catch (error) {}
+        if (content != '') {
+          articleContent += content + '<br />';
+        }
       }
 
       articles.push({
